@@ -14,7 +14,7 @@ settings = get_app_settings()
 
 class UsersRepository(BaseRepository[User, UserInCreate, UserInUpdate]):
     """
-    Repository to manipulate with the task.
+    Repository to manipulate with the financial_records.
     """
 
     def get_by_username(self, username: str) -> Optional[User]:

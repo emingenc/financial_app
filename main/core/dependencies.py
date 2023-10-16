@@ -8,11 +8,11 @@ from starlette.status import (
 
 from main.core.exceptions import (
     InactiveUserAccountException,
-    TaskNotFoundException,
+    FinancialRecordNotFoundException,
     UserPermissionException,
 )
-from main.db.repositories.tasks import TasksRepository, get_tasks_repository
-from main.models.task import Task
+from main.db.repositories.financial_records import FinancialRecordsRepository, get_financial_records_repository
+from main.models.financial_record import FinancialRecord
 from main.models.user import User
 from main.services.user import UserService
 
@@ -32,25 +32,25 @@ def get_current_user(
     return user
 
 
-def get_current_task(
-    task_id: str,
-    repo: TasksRepository = Depends(get_tasks_repository),
+def get_current_financial_record(
+    financial_record_id: str,
+    repo: FinancialRecordsRepository = Depends(get_financial_records_repository),
     current_user: User = Depends(get_current_user),
-) -> Task:
+) -> FinancialRecord:
     """
-    Check if task with `task_id` exists in database.
+    Check if financial_record with `financial_record_id` exists in database.
     """
-    task = repo.get(obj_id=task_id)
-    if not task:
-        raise TaskNotFoundException(
-            message=f"Task with id `{task_id}` not found",
+    financial_record = repo.get(obj_id=financial_record_id)
+    if not financial_record:
+        raise FinancialRecordNotFoundException(
+            message=f"Financial Record with id `{financial_record_id}` not found",
             status_code=HTTP_404_NOT_FOUND,
         )
-    if task.owner_id != current_user.id:
+    if financial_record.owner_id != current_user.id:
         raise UserPermissionException(
             message="Not enough permissions", status_code=HTTP_403_FORBIDDEN
         )
-    return task
+    return financial_record
 
 
 def get_current_active_user(

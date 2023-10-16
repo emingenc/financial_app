@@ -32,9 +32,9 @@ class BaseInternalException(Exception):
         self.status_code = status_code
 
 
-class TaskNotFoundException(BaseInternalException):
+class FinancialRecordNotFoundException(BaseInternalException):
     """
-    Exception raised when `task_id` field from JSON body not found.
+    Exception raised when `financial_record_id` field from JSON body not found.
     """
 
 
@@ -64,7 +64,7 @@ class InactiveUserAccountException(BaseInternalException):
 
 class UserPermissionException(BaseInternalException):
     """
-    Exception raised when user try to read task from other owner.
+    Exception raised when user try to read financial_record from other owner.
     """
 
 

@@ -4,7 +4,7 @@ Module configuration custom logger.
 import logging
 from typing import List, Optional
 
-DEFAULT_LOGGER_NAME = "fastapi-todo"
+DEFAULT_LOGGER_NAME = "fastapi-financialRecord"
 
 LOG_MESSAGE_FORMAT = "[%(name)s] [%(asctime)s] %(message)s"
 

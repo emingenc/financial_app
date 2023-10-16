@@ -7,10 +7,11 @@ from main.core.security import get_password_hash
 from main.db.base_class import Base
 
 if TYPE_CHECKING:
-    from main.models.task import Task  # noqa
+    from main.models.financial_record import FinancialRecord  # noqa
 
 
 class User(Base):
+
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     username = Column(String, unique=True)
     email = Column(String)
@@ -18,7 +19,7 @@ class User(Base):
     hashed_password = Column(String, nullable=False)
     disabled = Column(Boolean, default=False)
 
-    tasks = relationship("Task", back_populates="owner")
+    financial_records = relationship("FinancialRecord", back_populates="owner")
 
     def __init__(
         self, username: str, email: str, full_name: str, password: str
